@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather_app/data/constants.dart';
 import 'package:weather_app/data/notifiers.dart';
 import 'package:weather_app/pages/weather_page.dart';
 
@@ -14,6 +16,18 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
+  @override
+  void initState() {
+    initThemeMode();
+    super.initState();
+  }
+
+  void initThemeMode() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    final bool? repeat = prefs.getBool(Kconstants.themeModeKey);
+    isDarkMode.value = repeat ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return ValueListenableBuilder(

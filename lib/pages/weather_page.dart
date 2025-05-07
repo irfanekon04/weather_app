@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather_app/data/constants.dart';
 import 'package:weather_app/data/notifiers.dart';
 import 'package:weather_app/model/weather_model.dart';
 import 'package:weather_app/services/weather_service.dart';
@@ -76,8 +78,11 @@ class _WeatherPageState extends State<WeatherPage> {
         ),
         actions: [
           IconButton(
-            onPressed: () {
+            onPressed: () async {
               isDarkMode.value = !isDarkMode.value;
+              final SharedPreferences prefs =
+                  await SharedPreferences.getInstance();
+              await prefs.setBool(Kconstants.themeModeKey, isDarkMode.value);
             },
             icon: ValueListenableBuilder(
               valueListenable: isDarkMode,
@@ -92,6 +97,19 @@ class _WeatherPageState extends State<WeatherPage> {
           ),
         ],
         // backgroundColor: Colors.blueGrey,
+      ),
+      drawer: Drawer(
+        child: SafeArea(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(onPressed: () {}, child: Text('This is a button')),
+              Text('It does not do anything'),
+              Image(image: AssetImage('assets/icon/icon.png')),
+              Text('this is a test image'),
+            ],
+          ),
+        ),
       ),
       body: Center(
         child: Column(
