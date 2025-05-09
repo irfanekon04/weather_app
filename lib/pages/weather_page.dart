@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/data/constants.dart';
@@ -27,10 +28,11 @@ class _WeatherPageState extends State<WeatherPage> {
         _weather = weather;
       });
     } catch (e) {
-      print(e);
+      //m
     }
   }
 
+  String date = DateFormat("yMMMMd").format(DateTime.now());
   String getWeatherAnimation(String? mainCondition) {
     if (mainCondition == null) return 'assets/animations/sunny.json';
 
@@ -72,7 +74,8 @@ class _WeatherPageState extends State<WeatherPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: 
+        Text(
           'Weather',
           style: GoogleFonts.lato(fontWeight: FontWeight.w600),
         ),
@@ -98,36 +101,51 @@ class _WeatherPageState extends State<WeatherPage> {
         ],
         // backgroundColor: Colors.blueGrey,
       ),
-      drawer: Drawer(
-        child: SafeArea(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
-            children: [
-              ElevatedButton(onPressed: () {}, child: Text('This is a button')),
-              Text('It does not do anything'),
-              Image(image: AssetImage('assets/icon/icon.png')),
-              Text('this is a test image'),
-            ],
-          ),
-        ),
-      ),
-      body: Center(
+      // drawer: Drawer(
+      //   child: SafeArea(
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //       children: [
+      //         ElevatedButton(onPressed: () {}, child: Text('This is a button')),
+      //         Text('It does not do anything'),
+      //         Image(image: AssetImage('assets/icon/icon.png')),
+      //         Text('this is a test image'),
+      //       ],
+      //     ),
+      //   ),
+      // ),
+      body: SingleChildScrollView(
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Container(
+              margin: const EdgeInsets.only(left: 20, right: 20),
+              alignment: Alignment.topLeft,
+              child: Text(
+                _weather?.cityName ?? "loading city...",
+                style: GoogleFonts.lato(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 35,
+                  fontStyle: FontStyle.normal,
+                ),
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
+              alignment: Alignment.topLeft,
+              child: Text(
+                date,
+                style: GoogleFonts.lato(
+                  fontWeight: FontWeight.w900,
+                  fontSize: 14,
+                  fontStyle: FontStyle.normal,
+                ),
+              ),
+            ),
             Text(
               '${_weather?.temperature.round()}°C',
               style: GoogleFonts.lato(
                 fontWeight: FontWeight.w800,
                 fontSize: 60,
-              ),
-            ),
-            Text(
-              _weather?.cityName ?? "loading city...",
-              style: GoogleFonts.lato(
-                fontWeight: FontWeight.w500,
-                fontSize: 25,
-                fontStyle: FontStyle.italic,
               ),
             ),
             Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
