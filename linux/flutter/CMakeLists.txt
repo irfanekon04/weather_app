@@ -17,7 +17,7 @@ function(list_prepend LIST_NAME PREFIX)
         list(APPEND NEW_LIST "${PREFIX}${element}")
     endforeach(element)
     set(${LIST_NAME} "${NEW_LIST}" PARENT_SCOPE)
-endfunction()
+endfunction()z
 
 # === Flutter Library ===
 # System-level dependencies.
