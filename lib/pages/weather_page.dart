@@ -73,34 +73,30 @@ class _WeatherPageState extends State<WeatherPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: 
-        Text(
-          'Weather',
-          style: GoogleFonts.lato(fontWeight: FontWeight.w600),
-        ),
-        actions: [
-          IconButton(
-            onPressed: () async {
-              isDarkMode.value = !isDarkMode.value;
-              final SharedPreferences prefs =
-                  await SharedPreferences.getInstance();
-              await prefs.setBool(Kconstants.themeModeKey, isDarkMode.value);
-            },
-            icon: ValueListenableBuilder(
-              valueListenable: isDarkMode,
-              builder: (context, isDarkMode, child) {
-                return Icon(
-                  isDarkMode
-                      ? Icons.light_mode_rounded
-                      : Icons.dark_mode_rounded,
-                );
-              },
-            ),
-          ),
-        ],
-        // backgroundColor: Colors.blueGrey,
-      ),
+      // appBar: AppBar(
+      //   title: Text('', style: GoogleFonts.lato(fontWeight: FontWeight.w600)),
+      //   actions: [
+      //     IconButton(
+      //       onPressed: () async {
+      //         isDarkMode.value = !isDarkMode.value;
+      //         final SharedPreferences prefs =
+      //             await SharedPreferences.getInstance();
+      //         await prefs.setBool(Kconstants.themeModeKey, isDarkMode.value);
+      //       },
+      //       icon: ValueListenableBuilder(
+      //         valueListenable: isDarkMode,
+      //         builder: (context, isDarkMode, child) {
+      //           return Icon(
+      //             isDarkMode
+      //                 ? Icons.light_mode_rounded
+      //                 : Icons.dark_mode_rounded,
+      //           );
+      //         },
+      //       ),
+      //     ),
+      //   ],
+      //   // backgroundColor: Colors.blueGrey,
+      // ),
       // drawer: Drawer(
       //   child: SafeArea(
       //     child: Column(
