@@ -7,6 +7,7 @@ import 'package:weather_app/data/notifiers.dart';
 import 'package:weather_app/model/weather_model.dart';
 import 'package:weather_app/services/weather_service.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:weather_app/views/weather_info.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
@@ -33,6 +34,7 @@ class _WeatherPageState extends State<WeatherPage> {
   }
 
   String date = DateFormat("yMMMMd").format(DateTime.now());
+
   String getWeatherAnimation(String? mainCondition) {
     if (mainCondition == null) return 'assets/animations/sunny.json';
 
@@ -125,6 +127,7 @@ class _WeatherPageState extends State<WeatherPage> {
                 ),
               ),
             ),
+            SizedBox(height: 10),
             Container(
               margin: const EdgeInsets.only(left: 20, right: 20, bottom: 20),
               alignment: Alignment.topLeft,
@@ -137,6 +140,7 @@ class _WeatherPageState extends State<WeatherPage> {
                 ),
               ),
             ),
+            SizedBox(height: 10),
             Text(
               '${_weather?.temperature.round()}°C',
               style: GoogleFonts.lato(
@@ -144,6 +148,7 @@ class _WeatherPageState extends State<WeatherPage> {
                 fontSize: 60,
               ),
             ),
+            SizedBox(height: 10),
             Lottie.asset(getWeatherAnimation(_weather?.mainCondition)),
             Text(
               _weather?.mainCondition ?? "",
@@ -152,6 +157,7 @@ class _WeatherPageState extends State<WeatherPage> {
                 fontSize: 30,
               ),
             ),
+            SizedBox(height: 10),
           ],
         ),
       ),

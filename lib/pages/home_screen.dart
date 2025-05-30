@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/data/constants.dart';
 import 'package:weather_app/data/notifiers.dart';
 import 'package:weather_app/pages/weather_page.dart';
+import 'package:weather_app/views/weather_info.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -17,22 +18,22 @@ class _HomeScreenState extends State<HomeScreen> {
   final _destinations = [
     NavigationDestination(
       icon: Icon(Icons.home_outlined),
-      selectedIcon: Icon(Icons.home_rounded),
+      selectedIcon: Icon(Icons.home_rounded, color: Colors.black),
       label: 'label',
     ),
     NavigationDestination(
       icon: Icon(Icons.search_outlined),
-      selectedIcon: Icon(Icons.search_rounded),
+      selectedIcon: Icon(Icons.search_rounded, color: Colors.black),
       label: 'label',
     ),
     NavigationDestination(
       icon: Icon(Icons.wb_sunny_outlined),
-      selectedIcon: Icon(Icons.wb_sunny_rounded),
+      selectedIcon: Icon(Icons.wb_sunny_rounded, color: Colors.black),
       label: 'label',
     ),
     NavigationDestination(
       icon: Icon(Icons.settings_outlined),
-      selectedIcon: Icon(Icons.settings_rounded),
+      selectedIcon: Icon(Icons.settings_rounded, color: Colors.black),
       label: 'label',
     ),
   ];
@@ -40,7 +41,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final _screens = [
     const WeatherPage(),
     const Center(child: Text('Search')),
-    const Center(child: Text('Weather')),
+    const WeatherPage(),
     const Center(child: Text('Settings')),
   ];
 
@@ -48,10 +49,10 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
-          'Home Screen',
-          style: GoogleFonts.lato(fontWeight: FontWeight.w600),
-        ),
+        // title: Text(
+        //   'Home Screen',
+        //   style: GoogleFonts.lato(fontWeight: FontWeight.w600),
+        // ),
         actions: [
           IconButton(
             onPressed: () async {
@@ -72,15 +73,44 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
+
         // backgroundColor: Colors.blueGrey,
       ),
+      // drawer: Drawer(
+      //   child: SafeArea(
+      //     child: Column(
+      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
+      //       children: [
+      //         TextButton(
+      //           onPressed: () {},
+      //           child: Text(
+      //             'This is a button',
+      //             style: GoogleFonts.lato(fontWeight: FontWeight.w800),
+      //           ),
+      //         ),
+      //         Text(
+      //           'It does not do anything',
+      //           style: GoogleFonts.lato(fontWeight: FontWeight.w800),
+      //         ),
+      //         Image(image: AssetImage('assets/icon/icon.png')),
+      //         Text(
+      //           'this is a test image',
+      //           style: GoogleFonts.lato(fontWeight: FontWeight.w800),
+      //         ),
+      //       ],
+      //     ),
+      //   ),
+      // ),
       body: _screens[_currentPageIndex],
       bottomNavigationBar: NavigationBar(
+        backgroundColor: Colors.transparent,
         destinations: _destinations,
         labelBehavior: NavigationDestinationLabelBehavior.alwaysHide,
         selectedIndex: _currentPageIndex,
-        indicatorColor: Colors.transparent,
-        indicatorShape: CircleBorder(),
+        indicatorColor: Theme.of(context).colorScheme.secondary,
+        indicatorShape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(10)),
+        ),
         onDestinationSelected: (index) {
           setState(() {
             _currentPageIndex = index;
