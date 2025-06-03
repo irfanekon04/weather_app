@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/data/constants.dart';
 import 'package:weather_app/data/notifiers.dart';
 import 'package:weather_app/pages/weather_page.dart';
-import 'package:weather_app/views/weather_info.dart';
+// import 'package:weather_app/views/weather_info.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -19,22 +19,22 @@ class _HomeScreenState extends State<HomeScreen> {
     NavigationDestination(
       icon: Icon(Icons.home_outlined),
       selectedIcon: Icon(Icons.home_rounded, color: Colors.black),
-      label: 'label',
+      label: 'Home',
     ),
     NavigationDestination(
       icon: Icon(Icons.search_outlined),
       selectedIcon: Icon(Icons.search_rounded, color: Colors.black),
-      label: 'label',
+      label: 'Search',
     ),
     NavigationDestination(
       icon: Icon(Icons.wb_sunny_outlined),
       selectedIcon: Icon(Icons.wb_sunny_rounded, color: Colors.black),
-      label: 'label',
+      label: 'Weather',
     ),
     NavigationDestination(
       icon: Icon(Icons.settings_outlined),
       selectedIcon: Icon(Icons.settings_rounded, color: Colors.black),
-      label: 'label',
+      label: 'Settings',
     ),
   ];
 

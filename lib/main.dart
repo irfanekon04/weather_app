@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/data/constants.dart';
 import 'package:weather_app/data/notifiers.dart';
 import 'package:weather_app/pages/home_screen.dart';
-import 'package:weather_app/pages/weather_page.dart';
+// import 'package:weather_app/pages/weather_page.dart';
 
 void main() {
   runApp(const MyApp());

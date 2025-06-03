@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:lottie/lottie.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_app/data/constants.dart';
-import 'package:weather_app/data/notifiers.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
+// import 'package:weather_app/data/constants.dart';
+// import 'package:weather_app/data/notifiers.dart';
 import 'package:weather_app/model/weather_model.dart';
 import 'package:weather_app/services/weather_service.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:weather_app/views/weather_info.dart';
+// import 'package:weather_app/views/weather_info.dart';
 
 class WeatherPage extends StatefulWidget {
   const WeatherPage({super.key});
