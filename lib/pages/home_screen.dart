@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
-// import 'package:google_fonts/google_fonts.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_app/data/constants.dart';
 import 'package:weather_app/data/notifiers.dart';
+import 'package:weather_app/model/weather_model.dart';
+import 'package:weather_app/pages/detailed_weather_page.dart';
 import 'package:weather_app/pages/weather_page.dart';
-// import 'package:weather_app/views/weather_info.dart';
+import 'package:weather_app/services/weather_service.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -15,44 +16,84 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   int _currentPageIndex = 0;
-  final _destinations = [
-    NavigationDestination(
-      icon: Icon(Icons.home_outlined),
-      selectedIcon: Icon(Icons.home_rounded, color: Colors.black),
-      label: 'Home',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.search_outlined),
-      selectedIcon: Icon(Icons.search_rounded, color: Colors.black),
-      label: 'Search',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.wb_sunny_outlined),
-      selectedIcon: Icon(Icons.wb_sunny_rounded, color: Colors.black),
-      label: 'Weather',
-    ),
-    NavigationDestination(
-      icon: Icon(Icons.settings_outlined),
-      selectedIcon: Icon(Icons.settings_rounded, color: Colors.black),
-      label: 'Settings',
-    ),
-  ];
+  Weather? _weather;
+  bool _isLoading = true;
 
-  final _screens = [
-    const WeatherPage(),
-    const Center(child: Text('Search')),
-    const WeatherPage(),
-    const Center(child: Text('Settings')),
-  ];
+  @override
+  void initState() {
+    super.initState();
+    _loadWeather();
+  }
+
+  Future<void> _loadWeather() async {
+    try {
+      print(" getting current city...");
+      final weatherService = WeatherService(
+        'c3c43192815e03fe2b535ade7b7229ca',
+      ); // replace with your actual API key
+      final city = await weatherService.getCurrentCity();
+      print("current city: $city");
+
+      print("🌐 Fetching weather...");
+      final weather = await weatherService.getWeather(city);
+      print("✅ Weather fetched: ${weather.temperature}°C");
+      setState(() {
+        _weather = weather;
+        _isLoading = false;
+      });
+    } catch (e) {
+      print('Failed to load weather: $e');
+      setState(() {
+        _isLoading = false;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    final screens = [
+      const WeatherPage(),
+      const Center(child: Text('Search')),
+      _isLoading
+          ? const Center(child: CircularProgressIndicator())
+          : (_weather != null
+              ? WeatherDetailPage(weather: _weather!)
+              : const Center(child: Text('Weather data not available'))),
+      const Center(child: Text('Settings')),
+    ];
+
+    final _destinations = [
+      NavigationDestination(
+        icon: Icon(Icons.home_outlined),
+        selectedIcon: Icon(Icons.home_rounded, color: Colors.grey),
+        label: 'Home',
+      ),
+      NavigationDestination(
+        icon: Icon(Icons.search_outlined),
+        selectedIcon: Icon(Icons.search_rounded, color: Colors.grey),
+        label: 'Search',
+      ),
+      NavigationDestination(
+        icon: Icon(Icons.wb_sunny_outlined),
+        selectedIcon: Icon(Icons.wb_sunny_rounded, color: Colors.grey),
+        label: 'Weather',
+      ),
+      NavigationDestination(
+        icon: Icon(Icons.settings_outlined),
+        selectedIcon: Icon(Icons.settings_rounded, color: Colors.grey),
+        label: 'Settings',
+      ),
+    ];
+
+    // final _screens = [
+    //   const WeatherPage(),
+    //   const Center(child: Text('Search')),
+    //   WeatherDetailPage(weather: widget.weather),
+    //   const Center(child: Text('Settings')),
+    // ];
+
     return Scaffold(
       appBar: AppBar(
-        // title: Text(
-        //   'Home Screen',
-        //   style: GoogleFonts.lato(fontWeight: FontWeight.w600),
-        // ),
         actions: [
           IconButton(
             onPressed: () async {
@@ -73,35 +114,8 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
         ],
-
-        // backgroundColor: Colors.blueGrey,
       ),
-      // drawer: Drawer(
-      //   child: SafeArea(
-      //     child: Column(
-      //       mainAxisAlignment: MainAxisAlignment.spaceAround,
-      //       children: [
-      //         TextButton(
-      //           onPressed: () {},
-      //           child: Text(
-      //             'This is a button',
-      //             style: GoogleFonts.lato(fontWeight: FontWeight.w800),
-      //           ),
-      //         ),
-      //         Text(
-      //           'It does not do anything',
-      //           style: GoogleFonts.lato(fontWeight: FontWeight.w800),
-      //         ),
-      //         Image(image: AssetImage('assets/icon/icon.png')),
-      //         Text(
-      //           'this is a test image',
-      //           style: GoogleFonts.lato(fontWeight: FontWeight.w800),
-      //         ),
-      //       ],
-      //     ),
-      //   ),
-      // ),
-      body: _screens[_currentPageIndex],
+      body: screens[_currentPageIndex],
       bottomNavigationBar: NavigationBar(
         backgroundColor: Colors.transparent,
         destinations: _destinations,
