@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/model/weather_model.dart'; // replace with actual path
+import 'package:google_fonts/google_fonts.dart';
+import 'package:weather_app/model/weather_model.dart'; 
 
 class WeatherDetailPage extends StatelessWidget {
   final Weather weather;
@@ -10,7 +11,7 @@ class WeatherDetailPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('${weather.cityName} Weather'),
+        title: Text('${weather.cityName} Weather',style: GoogleFonts.lato(fontWeight: FontWeight.w600)),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -20,14 +21,14 @@ class WeatherDetailPage extends StatelessWidget {
             Center(
               child: Text(
                 '${weather.temperature.toStringAsFixed(1)}°C',
-                style: const TextStyle(fontSize: 48, fontWeight: FontWeight.bold),
+                style: GoogleFonts.lato(fontWeight: FontWeight.w600, fontSize: 48),
               ),
             ),
             const SizedBox(height: 16),
             Center(
               child: Text(
                 weather.mainCondition,
-                style: const TextStyle(fontSize: 24),
+                style: GoogleFonts.lato(fontWeight: FontWeight.w600, fontSize: 24),
               ),
             ),
             const Divider(height: 32),
@@ -54,8 +55,8 @@ class WeatherInfoRow extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: const TextStyle(fontSize: 18)),
-          Text(value, style: const TextStyle(fontSize: 18, fontWeight: FontWeight.w500)),
+          Text(label, style: GoogleFonts.lato(fontWeight: FontWeight.w600, fontSize: 18)),
+          Text(value, style: GoogleFonts.lato(fontWeight: FontWeight.w600, fontSize: 18)),
         ],
       ),
     );
