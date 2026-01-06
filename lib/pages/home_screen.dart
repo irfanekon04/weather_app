@@ -28,15 +28,13 @@ class _HomeScreenState extends State<HomeScreen> {
   Future<void> _loadWeather() async {
     try {
       print(" getting current city...");
-      final weatherService = WeatherService(
-        'c3c43192815e03fe2b535ade7b7229ca',
-      ); // replace with your actual API key
+      final weatherService = WeatherService('c3c43192815e03fe2b535ade7b7229ca');
       final city = await weatherService.getCurrentCity();
       print("current city: $city");
 
-      print("🌐 Fetching weather...");
+      print("Fetching weather...");
       final weather = await weatherService.getWeather(city);
-      print("✅ Weather fetched: ${weather.temperature}°C");
+      print("Weather fetched: ${weather.temperature}°C");
       setState(() {
         _weather = weather;
         _isLoading = false;
@@ -53,13 +51,11 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     final screens = [
       const WeatherPage(),
-      const Center(child: Text('Search')),
       _isLoading
           ? const Center(child: CircularProgressIndicator())
           : (_weather != null
               ? WeatherDetailPage(weather: _weather!)
               : const Center(child: Text('Weather data not available'))),
-      const Center(child: Text('Settings')),
     ];
 
     final _destinations = [
@@ -69,19 +65,9 @@ class _HomeScreenState extends State<HomeScreen> {
         label: 'Home',
       ),
       NavigationDestination(
-        icon: Icon(Icons.search_outlined),
-        selectedIcon: Icon(Icons.search_rounded, color: Colors.grey),
-        label: 'Search',
-      ),
-      NavigationDestination(
         icon: Icon(Icons.wb_sunny_outlined),
         selectedIcon: Icon(Icons.wb_sunny_rounded, color: Colors.grey),
-        label: 'Weather',
-      ),
-      NavigationDestination(
-        icon: Icon(Icons.settings_outlined),
-        selectedIcon: Icon(Icons.settings_rounded, color: Colors.grey),
-        label: 'Settings',
+        label: 'Details',
       ),
     ];
 

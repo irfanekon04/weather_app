@@ -1,3 +1,5 @@
 {
-    "cmake.sourceDirectory": "D:/App Development/Projects/weather_app/linux"
+  "cmake.sourceDirectory": "D:/App Development/Projects/weather_app/linux",
+  "cmake.ignoreCMakeListsMissing": true,
+  "java.configuration.updateBuildConfiguration": "interactive"
 }

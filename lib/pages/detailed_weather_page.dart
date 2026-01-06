@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_app/model/weather_model.dart'; // replace with actual path
+import 'package:weather_app/model/weather_model.dart'; 
 
 class WeatherDetailPage extends StatelessWidget {
   final Weather weather;
