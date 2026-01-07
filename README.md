@@ -29,8 +29,8 @@ This project was built to practice Flutter fundamentals, API integration, and UI
 
 ## 📱 Screenshots
 
-![Home Screen](assets/screenshots/homescreen_dark.png)  
-![Home Screen](assets/screenshots/Homescreen_light.png)  
-![Home Screen](assets/screenshots/rain.png)
+| Home Screen | Light Mode | Dark Mode |
+| :---: | :---: | :---: |
+| <img src="assets/screenshots/rain.png" width="250"> | <img src="assets/screenshots/homescreen_light.png" width="250"> | <img src="assets/screenshots/homescreen_dark.png" width="250"> |
 
 ---
